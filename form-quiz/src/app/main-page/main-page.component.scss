@@ -1,0 +1,22 @@
+.wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.quiz {
+  background: #f0d264;
+}
+
+.common {
+  font-size: 40px;
+  font-weight: bold;
+  width: 250px;
+  border-radius: 6px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+}
+
+.fill {
+  background: #82c8a0;
+}

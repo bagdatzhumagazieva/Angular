@@ -1,0 +1,38 @@
+<div class="question">
+  <h1 *ngIf="time >= 0">Finish in time: {{time}}</h1>
+  <h1 *ngIf="time < 0">Time is over</h1>
+  <div *ngFor="let q of questions; let i = index">
+    <div class="question-item">
+      <div class="question-item__text">{{i + 1}}. {{q.text}}</div>
+      <div class="question-item__answer" *ngFor="let a of q.answerOptions; let ind = index">
+        <div class="question-item__answer__item">
+          <input
+            [disabled]="time < 0"
+            name="singleAnswer{{q.id}}"
+            type="radio"
+            *ngIf="q.type === 'single'"
+            (change)="handleChangeRadio($event, i, ind)"
+          >
+          <input
+            [disabled]="time < 0"
+            name="multipleAnswer{{q.id}}"
+            type="checkbox"
+            *ngIf="q.type === 'multiple'"
+            (change)="handleChangeCheckbox($event, i, ind)"
+          >
+          <div
+            [ngClass]="{'finish': isFinished,
+            'correct': isFinished && isClickedAnswer(i, ind) && isCorrectAnswer(i, ind),
+            'wrong': isFinished && isClickedAnswer(i, ind) && !isCorrectAnswer(i, ind)}"
+          >
+            {{a.text}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="submit" (click)="submit()" [disabled]="time < 0">
+    Submit
+  </button>
+</div>

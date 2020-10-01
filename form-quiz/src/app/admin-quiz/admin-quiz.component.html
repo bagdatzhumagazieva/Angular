@@ -1,0 +1,75 @@
+<div class="wrap">
+  <button class="title" (click)="handleSaveQuestions()">Create Quiz</button>
+  <div *ngFor="let q of questions; let i = index" class="new-question">
+
+    <form class="question-item">
+      <div class="cross" (click)="onDelQuestion(i)">X</div>
+      <div class="text">Type of question:</div>
+      <div class="d-flex mt-12">
+        <div>
+          <input
+            name="questionType_{{i}}"
+            type="radio"
+            [formControl]="radioControl"
+            [value]="1"
+            class="text"
+            (click)="chooseType(i, 'single')"
+          />
+          <span>Single</span>
+        </div>
+        <div>
+          <input
+            name="questionType_{{i}}"
+            type="radio"
+            class="text"
+            [formControl]="radioControl"
+            [value]="2"
+            (click)="chooseType(i, 'multiple')"
+          />
+          <span>Multiple</span>
+        </div>
+      </div>
+      <div class="text question-text">Question text</div>
+      <input
+        class="question-text__input"
+        type="text"
+        name="text"
+        [(ngModel)]="q.text"
+      />
+      <div class="text mt-12" style="color: #cb99c5">Answers</div>
+      <div *ngFor="let a of q.answerOptions; let ind = index" class="mt-12">
+        <div class="mt-12 answer-option">
+          <input
+            [checked]="a.isCorrect"
+            (change)="handleChangeRadio($event, i, ind)"
+            name="answer_{{i}}"
+            *ngIf="q.type==='single'"
+            type="radio"
+          >
+          <input
+            [checked]="a.isCorrect"
+            (change)="handleChangeCheckbox($event, i, ind)"
+            name="multi_answer_{{i}}"
+            *ngIf="q.type==='multiple'"
+            type="checkbox"
+          >
+          <input
+            class="answer-option__item"
+            type="text"
+            name="answerText_{{i}}"
+            [value]="a.text"
+            (change)="modelChanged($event, i, ind)"
+          >
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <button class="add-question" (click)="onAddQuestion()">
+    + Add question
+  </button>
+</div>
+
+<div class="questions">
+
+</div>
