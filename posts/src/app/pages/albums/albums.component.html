@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="d-flex">
+
+  <div>
+    <mat-button-toggle-group class="d-flex flex-column" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle
+        *ngFor="let user of users"
+        value="bold"
+        class="m-1"
+        routerLink="/albums/{{user.id}}"
+        (click)="onCLickUser()"
+      >
+        {{user.name}}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div>
+    <div class="example-sidenav-content">
+      <div *ngIf="album">
+        <mat-card *ngFor="let a of album" class="m-3">
+          {{a.title}}
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

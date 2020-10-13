@@ -1,0 +1,25 @@
+<mat-card class="m-4 p-5">
+  <h3><strong>{{post.id}}. {{post.title}}</strong></h3>
+  <h3>{{post.body}}</h3>
+  <button mat-button color="primary" (click)="setShowComment()">
+    {{showComment ? 'Hide' : 'Show'}} comments
+  </button>
+  <div *ngIf="showComment" class="ml-4">
+    <div *ngFor="let comment of comments" class="comment-item">
+      <h4><strong>{{comment.name}}</strong></h4>
+        {{comment.body}}
+    </div>
+
+    <div class="d-flex flex-column comment">
+      <mat-form-field class="example-full-width">
+        <mat-label>What is your name</mat-label>
+        <input matInput placeholder="Your name" [(ngModel)]="userName">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Comment</mat-label>
+        <input matInput placeholder="White your comment" [(ngModel)]="userComment">
+      </mat-form-field>
+      <button mat-flat-button color="primary" class="ml-3" (click)="createComment()">Send</button>
+    </div>
+  </div>
+</mat-card>

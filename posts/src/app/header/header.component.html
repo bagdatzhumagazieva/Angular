@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+    <h1>Welcome</h1>
+    <a
+      mat-button
+      [color]="routerLinkActive.isActive ? 'accent' : null"
+      routerLink="/all-posts"
+      routerLinkActive="acitve"
+      #routerLinkActive="routerLinkActive"
+    >
+      All posts
+    </a>
+    <a
+      mat-button
+      [color]="routerLinkActive.isActive ? 'accent' : null"
+      routerLink="/create-post"
+      routerLinkActive="acitve"
+      #routerLinkActive="routerLinkActive"
+    >
+      Create post
+    </a>
+    <a
+      mat-button
+      [color]="routerLinkActive.isActive ? 'accent' : null"
+      routerLink="/albums"
+      routerLinkActive="acitve"
+      #routerLinkActive="routerLinkActive"
+    >
+      Albums
+    </a>
+    <button mat-button (click)="authenticationService.signOut()">
+      Log out
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+

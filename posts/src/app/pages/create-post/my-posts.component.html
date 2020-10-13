@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<div class="d-flex justify-content-between m-5">
+  <div>
+    <h4>Who are you?</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose user</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="food">
+        <mat-option *ngFor="let user of users" [value]="user.id" (click)="getPostsByUser(+selectedValue)">
+          {{user.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngFor="let post of posts" class="post-list">
+      <app-post-card [post]="post"></app-post-card>
+    </div>
+  </div>
+  <div class="post-create m-5">
+    <mat-card class="d-flex flex-column">
+      <h2>Before creating your post, chose who are you!</h2>
+      <mat-form-field class="example-full-width mt-2">
+        <mat-label>Title</mat-label>
+        <input matInput
+               [formControl]="title"
+               placeholder="White title of post">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Body of your post</mat-label>
+        <textarea [(ngModel)]="body" matInput placeholder="Write you post"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="createPost()">Create post</button>
+    </mat-card>
+  </div>
+</div>

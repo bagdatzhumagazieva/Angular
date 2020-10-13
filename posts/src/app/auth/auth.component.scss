@@ -1,0 +1,15 @@
+.content {
+  width: 350px;
+  height: 350px;
+  border-radius: 6px;
+  border: 6px solid #CD5C5C;
+  display: flex;
+  justify-content: center;
+  margin: 100px auto;
+  align-items: center;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+  }
+}

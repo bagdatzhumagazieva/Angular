@@ -1,0 +1,33 @@
+<div class="content">
+  <form class="example-form content-form">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input matInput
+             [formControl]="username"
+             placeholder="Username">
+      <mat-error *ngIf="username.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width mt-4">
+      <input
+        [formControl]="password"
+        type="password"
+        placeholder="Password"
+        matInput
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      [disabled]="!password.valid || !username.valid"
+      (click)="authenticationService.signIn({username: username.value, password: password.value})"
+    >
+      log in
+    </button>
+    <a routerLink="/register">
+      <button mat-button class="mt-3">Register</button>
+    </a>
+  </form>
+</div>
