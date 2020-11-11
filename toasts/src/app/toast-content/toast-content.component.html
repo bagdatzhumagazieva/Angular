@@ -1,0 +1,13 @@
+<div class="toast-content_wrapper">
+  <div
+    class="toast-content" [ngClass]="toast.color"
+  >
+    <span *ngIf="toast.hasCloseButton" class="cross-btn" (click)="removeToast.emit(toast.id)">X</span>
+    <div class="toast-content__text">
+      <p *ngIf="toast.showTitle"><b>{{toast.title || 'Error'}} </b></p>
+      <p *ngIf="!toast.showTitle"><b>Error</b></p>
+      <p>{{toast.content || 'Error content message'}}</p>
+    </div>
+    <div *ngIf="toast.showDuration && toast.duration" class="duration duration_{{toast.duration}}"></div>
+  </div>
+</div>

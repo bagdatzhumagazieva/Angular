@@ -1,0 +1,132 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input matInput
+           type="text"
+           [formControl]="title"
+           placeholder="title">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Content</mat-label>
+    <input matInput
+           type="text"
+           [formControl]="content"
+           placeholder="content">
+  </mat-form-field>
+  <button mat-button color="warn" (click)="createToaster()">Create toast</button>
+</form>
+
+<div style="display: flex; margin-left: 48px">
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group d-block"
+    [(ngModel)]="color">
+    <mat-radio-button class="example-radio-button pb-12" *ngFor="let c of colors" [value]="c">
+      {{c}}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <form class="example-form d-block" style="margin-left: 100px" [formGroup]="formGroup" (ngSubmit)="onFormSubmit()" ngNativeValidate>
+
+    <mat-slide-toggle formControlName="showTitle" class="pb-12">Show title</mat-slide-toggle>
+    <mat-slide-toggle formControlName="hasCloseButton" class="pb-12">Has close button</mat-slide-toggle>
+    <mat-slide-toggle formControlName="showDuration" class="pb-12">Show duration</mat-slide-toggle>
+
+    <button mat-raised-button type="submit">Save Settings</button>
+  </form>
+
+  <div style="margin-left: 100px">
+    <mat-label><b>Vertical position</b></mat-label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group d-block"
+      [(ngModel)]="vertical">
+      <mat-radio-button class="example-radio-button pb-12" *ngFor="let c of verticals" [value]="c">
+        {{c}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div style="margin-left: 100px">
+    <mat-label><b>Horizontal position</b></mat-label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group d-block pb-12"
+      [(ngModel)]="horizontal">
+      <mat-radio-button class="example-radio-button pb-12" *ngFor="let c of horizontals" [value]="c">
+        {{c}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<div>
+  <mat-label><b>Duration (0 for no close)</b></mat-label>
+  <mat-slider
+    thumbLabel
+    (valueChange)="setDuration($event)"
+    [displayWith]="formatLabel"
+    tickInterval="1"
+    min="0"
+    max="10"></mat-slider>
+</div>
+
+<!--TOP-->
+<div class="toaster-content" style="top: 0; left: 0">
+  <div *ngFor="let t of topStartToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<div class="toaster-content" style="top: 0; left: calc(50% - 125px)">
+  <div *ngFor="let t of topCenterToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<div class="toaster-content" style="top: 0; right: 0">
+  <div *ngFor="let t of topEndToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<!--CENTER-->
+
+<div class="toaster-content" style="top: 50%; left: 0">
+  <div *ngFor="let t of centerStartToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<div class="toaster-content" style="top: 50%; left: calc(50% - 125px)">
+  <div *ngFor="let t of centerCenterToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<div class="toaster-content" style="top: 50%; right: 0">
+  <div *ngFor="let t of centerEndToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<!--BOTTOM-->
+
+<div class="toaster-content" style="bottom: 0; left: 0">
+  <div *ngFor="let t of bottomStartToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<div class="toaster-content" style="bottom: 0; left: calc(50% - 125px)">
+  <div *ngFor="let t of bottomCenterToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
+
+<div class="toaster-content" style="bottom: 0; right: 0">
+  <div *ngFor="let t of bottomEndToasts">
+    <app-toast-content [toast]="t" (removeToast)="removeToast($event)"></app-toast-content>
+  </div>
+</div>
