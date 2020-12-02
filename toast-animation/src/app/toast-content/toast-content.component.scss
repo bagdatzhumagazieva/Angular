@@ -1,0 +1,177 @@
+.toast-content_wrapper {
+  .toast-content {
+    position: relative;
+    margin: 10px;
+    width: 250px;
+    height: 70px;
+    border-radius: 3px;
+
+    .cross-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    &__text {
+      padding: 8px;
+      color: white;
+    }
+
+    .duration {
+      position: absolute;
+      width: 250px;
+      height: 4px;
+      border-radius: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(000, 000, 000, 0.3);
+    }
+
+  }
+
+  .IsFailed {
+    background-color: #e8554e;
+  }
+  $durations: (
+    duration_1: 1,
+    duration_2: 2,
+    duration_3: 3,
+    duration_4: 4,
+    duration_5: 5,
+    duration_6: 6,
+    duration_7: 7,
+    duration_8: 8,
+    duration_9: 9,
+    duration_10: 10,
+  );
+
+  @each $key, $value in $durations {
+    $class_name: "#{$key}";
+    $animation: mymove #{$value}s;
+
+    .#{$class_name} {
+      animation: $animation;
+      animation-timing-function: linear;
+    }
+
+    @keyframes mymove {
+      from { width: 250px; }
+      to { width: 0; }
+    }
+  }
+
+  .animationLeft {
+    animation: move-in-steps 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-in-steps {
+    0% {
+      left: -250px;
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+      left: 0;
+    }
+  }
+
+  .animationLeft_remove {
+    animation: move-in-steps-left-remove 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-in-steps-left-remove {
+    0% {
+      left: 0;
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+      left: -250px;
+    }
+  }
+
+  .animationRight {
+    animation: move-in-steps-right 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-in-steps-right {
+    0% {
+      left: 250px;
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+      left: 0;
+    }
+  }
+
+  .animationRight_remove {
+    animation: move-in-steps-right-remove 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-in-steps-right-remove {
+    0% {
+      left: 0;
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+      left: 250px;
+    }
+  }
+
+  .animationCenter {
+    animation: move-in-steps-center 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-in-steps-center {
+    0% {
+      top: -100px;
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+      top: 0;
+    }
+  }
+
+  .animationCenter_remove {
+    animation: move-in-steps-center-remove 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-in-steps-center-remove {
+    0% {
+      top: 0;
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+      top: -100px;
+    }
+  }
+  .IsSuccess {
+    background-color: #2aa876;
+  }
+
+  .IsStart {
+    background-color: #ffd265;
+  }
+
+  .isClear {
+    background-color: #0a7b83;
+  }
+
+  .top_start {
+    top: 0;
+    left: 0;
+  }
+}
+
