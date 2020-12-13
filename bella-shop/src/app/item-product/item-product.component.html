@@ -1,0 +1,29 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Name: {{product.name}}</mat-card-title>
+    <mat-card-subtitle>Price: {{product.price}} Tg</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://imageshost.ru/images/2020/05/02/ZAKAZ-KRASNAY-KARTINKA.jpg" alt="Image "/>
+  <mat-card-content>
+    <p>
+      {{product.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Category:
+      <span *ngFor="let c of categoryName">{{c}}, </span>
+    </button>
+  </mat-card-actions>
+  <mat-card-actions>
+    <button mat-button>Age range:
+      <span>{{ages}}</span>
+    </button>
+  </mat-card-actions>
+  <img *ngIf="isAdmin" src="assets/dele.png" (click)="onDeleteProduct.emit(product.id)" class="icon m-2">
+  <img *ngIf="withBasket && !inBasket" src="assets/basket.png" (click)="handleAddBasket()" class="icon m-2">
+  <img *ngIf="withBasket && inBasket" src="assets/basket-with-product.jpg" (click)="handleRemoveBasket()" class="icon m-2">
+  <a [href]="'/edit-product/' + product.id">
+    <img *ngIf="isAdmin" src="assets/edit.png" class="icon">
+  </a>
+</mat-card>

@@ -1,0 +1,17 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <a href="/auth?type=login">
+      <h2 [class]="isLogin ? 'active' : 'inactive'"> Sign In </h2>
+    </a>
+    <a href="/auth?type=register">
+      <h2 [class]="!isLogin ? 'active' : 'inactive'">Sign Up </h2>
+    </a>
+
+    <form>
+      <input type="text" id="login" [(ngModel)]="username" class="fadeIn second" name="login" placeholder="login">
+      <input [(ngModel)]="password" type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input (click)="onClickAuth()" type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <div class="d-flex align-items-center justify-content-between pl-5 w-100">
+      <div><h1>Welcome to Bella's shop</h1></div>
+      <div *ngIf="!isAuthorized">
+        <a href="/auth?type=login">
+          <button mat-flat-button color="accent" >Log in</button>
+        </a>
+        <a href="/auth?type=register">
+          <button mat-flat-button color="accent">Register</button>
+        </a>
+      </div>
+      <a *ngIf="isAdmin" href="/admin-panel">
+        <button mat-flat-button color="accent">Admin panel</button>
+      </a>
+      <div *ngIf="isAuthorized">
+        <a href="/basket">
+          <button mat-flat-button color="accent">Basket</button>
+        </a>
+        <button mat-flat-button color="accent" (click)="logout()">Log out</button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div *ngIf="!isAuthorized">
+  <div class="d-flex align-items-center w-100 p-5 justify-content-around">
+    <div>
+      <button mat-stroked-button color="accent">Categories</button>
+      <mat-selection-list #categories [multiple]="false">
+        <mat-list-option *ngFor="let c of categoryList" [value]="c.name">
+          {{c.name}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+    <img src="assets/logo.jpg" class="logo-img">
+    <div>
+      <button mat-stroked-button color="accent">Age range</button>
+      <mat-selection-list #age [multiple]="false">
+        <mat-list-option *ngFor="let c of ageRange" [value]="c.age">
+          {{c.age}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column align-items-center justify-content-center">
+    <div class="align-items-center dash-text">
+      <h1>
+        You are <b>{{age.selectedOptions.selected[0]?.value || '...'}} </b> old
+      </h1>
+      <h1>
+        You are going to choose <b>{{categories.selectedOptions.selected[0]?.value || '...'}}</b> products
+      </h1>
+    </div>
+    <div *ngIf="categories.selectedOptions.selected[0]?.value && age.selectedOptions.selected[0]?.value">
+      <div class="dash-text-below">
+        You can find your products with your suit age after authorization, please authorize and enjoy with your trades
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isAuthorized">
+  <div class="d-flex justify-content-between m-5">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select [formControl]="categories" multiple>
+          <mat-select-trigger>
+            {{categories.value ? categories.value[0] : ''}}
+            <span *ngIf="categories.value?.length > 1" class="example-additional-selection">
+        (+{{categories.value.length - 1}} {{categories.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+          </mat-select-trigger>
+          <mat-option (click)="onChooseCategory()" *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-form-field">
+        <mat-label>Search product</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue">
+        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap p-5">
+    <div *ngFor="let p of products" class="m-4">
+      <app-item-product
+        withBasket="true"
+        class="d-flex flex-wrap"
+        [product]="p"
+        (onAddBasket)="onAddBasket($event)"
+        (onRemoveBasket)="onRemoveBasket($event)"
+      >
+      </app-item-product>
+    </div>
+    <div *ngIf="!products.length">
+      <h1>There is no product</h1>
+    </div>
+  </div>
+</div>

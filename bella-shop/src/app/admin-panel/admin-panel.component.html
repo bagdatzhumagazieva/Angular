@@ -1,0 +1,49 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <div class="d-flex align-items-center justify-content-between pl-5 w-100">
+      <div><h1>Welcome to Bella's shop! It is Admin Panel</h1></div>
+    </div>
+    <a href="/">
+      <button mat-flat-button color="accent" >Back</button>
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div>
+  <div class="d-flex justify-content-between m-5">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select [formControl]="categories" multiple>
+          <mat-select-trigger>
+            {{categories.value ? categories.value[0] : ''}}
+            <span *ngIf="categories.value?.length > 1" class="example-additional-selection">
+        (+{{categories.value.length - 1}} {{categories.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+          </mat-select-trigger>
+          <mat-option (click)="onChooseCategory()" *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-form-field">
+        <mat-label>Search product</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue" (change)="onChange($event)">
+        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <a href="/create-product">
+      <button mat-flat-button color="accent" >Create product</button>
+    </a>
+  </div>
+
+  <div class="d-flex flex-wrap p-5">
+    <div *ngFor="let p of products" class="mx-4">
+      <app-item-product (onDeleteProduct)="onDeleteProduct($event)" isAdmin=true class="d-flex flex-wrap" [product]="p"></app-item-product>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,20 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <div class="d-flex align-items-center justify-content-between pl-5 w-100">
+      <div><h1>Here is your basket</h1></div>
+      <a href="/">
+        <button mat-flat-button color="accent" >Back</button>
+      </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="d-flex flex-wrap p-5">
+  <div *ngFor="let p of basketProducts" class="m-4">
+    <app-item-product
+      class="d-flex flex-wrap"
+      [product]="p"
+    >
+    </app-item-product>
+  </div>
+</div>

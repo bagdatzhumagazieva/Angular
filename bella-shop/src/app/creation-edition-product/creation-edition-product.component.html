@@ -1,0 +1,39 @@
+<div class="form-style-5">
+  <form>
+    <fieldset>
+      <legend><span class="number">1</span> {{type === 'create' ? 'Создание' : 'Редактирование'}} продукта</legend>
+      <input type="text" name="field1" placeholder="Название продукта" [(ngModel)]="product.name">
+      <input type="text" name="field2" placeholder="Описание" [(ngModel)]="product.description">
+      <input type="number" name="field3" placeholder="Цена" [(ngModel)]="product.price">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select [formControl]="categories" multiple>
+            <mat-select-trigger>
+              {{categories.value ? categories.value[0] : ''}}
+              <span *ngIf="categories.value?.length > 1" class="example-additional-selection">
+                (+{{categories.value.length - 1}} {{categories.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Age range</mat-label>
+          <mat-select [formControl]="age">
+            <mat-select-trigger>
+              {{age.value ? age.value[0] : ''}}
+              <span *ngIf="age.value?.length > 1" class="example-additional-selection">
+                 (+{{age.value.length - 1}} {{age.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let a of ageRange" [value]="a.id">{{a.age}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </fieldset>
+    <input type="submit" [value]="(type === 'edit' ? 'Edit': 'Create') + ' product'" (click)="onCreateProduct()" />
+  </form>
+</div>
